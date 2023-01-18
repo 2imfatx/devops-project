@@ -1,18 +1,6 @@
 pipeline {
-    agent {
-        label 'docker'
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                sh "docker build -t myimage:$BUILD_NUMBER ."
-            }
-        }
+    agent none
+    stages{
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
