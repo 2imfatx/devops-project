@@ -1,8 +1,26 @@
-node {
-    checkout scm
-    
-    docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
-        def customImage = docker.build("2imfatx/20127589")
-        customImage.push()
+pipeline {
+    agent {
+        label 'docker'
+    }
+    agent none
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh "docker build -t myimage:$BUILD_NUMBER ."
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u $USERNAME -p $PASSWORD"
+                    sh "docker push myimage:$BUILD_NUMBER"
+                }
+            }
+        }
     }
 }
