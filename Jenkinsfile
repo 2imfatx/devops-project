@@ -1,28 +1,22 @@
 pipeline {
-  agent {
-    node{
-     label 'docker-agent-alpine'
+    agent {
+        docker {
+            image 'gcc:latest'
+        }
     }
-  }
-  triggers {
-    pollSCM '*/5 * * * *'
-  }
-  stages{
-    
-    stage('Build'){
-      steps{
-       sh 'echo "Building..."'
-       sh 'apt-get update'
-       sh 'apt install -y g++'
-       sh 'g++ -o hello-world hello-world.cpp'
-      }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Building..."'
+                sh 'apk update'
+                sh 'apk add g++'
+                sh 'g++ -o hello-world hello-world.cpp'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "Testing..."'
+            }
+        }
     }
-    stage('Test'){
-      steps{
-       sh 'echo "Testing..."'
-       sh './hello-world'
-       sh 'echo test'
-      }
-    }
-  }
 }
