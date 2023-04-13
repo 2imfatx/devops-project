@@ -19,8 +19,6 @@ pipeline {
        sh 'echo "Testing..."'
        sh './hello-world'
       }
-        
+    }
   }
-
-  
 }
