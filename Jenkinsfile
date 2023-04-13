@@ -11,7 +11,8 @@ pipeline {
     stage('Build'){
       steps{
        sh 'echo "Building..."'
-       sh 'sudo -y apt install g++'
+       sh 'apt-get update'
+       sh 'apt install -y g++'
        sh 'g++ -o hello-world hello-world.cpp'
       }
     }
