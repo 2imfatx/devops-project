@@ -18,6 +18,7 @@ pipeline {
       steps{
        sh 'echo "Testing..."'
        sh './hello-world'
+       sh 'echo test'
       }
     }
   }
