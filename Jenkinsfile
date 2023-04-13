@@ -10,9 +10,16 @@ pipeline {
   stages{
     stage('Build'){
       steps{
-       echo 'Building..' 
+       sh 'echo "Building..."'
+       sh 'g++ -o hello-world hello-world.cpp'
       }
     }
+    stage('Test'){
+      steps{
+       sh 'echo "Testing..."'
+       sh './hello-world'
+      }
+        
   }
 
   
