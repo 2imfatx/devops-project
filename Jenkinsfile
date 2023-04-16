@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo apk add build-base'
+                sh 'apk add build-base'
                 sh 'sudo g++ -o my_app hello.cpp'
             }
         }
