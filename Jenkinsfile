@@ -1,18 +1,20 @@
 pipeline {
     agent {
-        node{
-            label 'docker-agent-gcc'
+        docker {
+            image 'alpine:latest'
+            args '--user=root'
         }
     }
     stages {
         stage('Build') {
             steps {
-               sh 'echo test build'
+                sh 'apk add build-base'
+                sh 'g++ -o my_app hello.cpp'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo test'
+                // run your tests here
             }
         }
     }
