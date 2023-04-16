@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'docker-agent-alpine'
+        label 'docker-agent-python'
     }
     triggers {
         pollSCM '* * * * *'
@@ -9,7 +9,7 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'echo "Building..."'
-                sh 'apt-get update'
+                sh 'py'
             }
         }
         stage('Test'){
