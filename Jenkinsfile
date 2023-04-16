@@ -9,7 +9,7 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'echo "Building..."'
-                sh 'sudo -s'
+                sh 'sudo apt-get update'
             }
         }
         stage('Test'){
