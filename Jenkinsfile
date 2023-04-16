@@ -1,8 +1,7 @@
 pipeline {
     agent {
-        docker {
-            image 'alpine:latest'
-            args '--user=root'
+        node{
+            label 'docker-agent-alpine'
         }
     }
     stages {
