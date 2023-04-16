@@ -1,17 +1,14 @@
 pipeline {
     agent {
-        label 'docker-agent-python'
-    }
-    stages{
-        stage('Build'){
-            steps{
-                sh 'echo "Building..."'
-                sh 'py'
-            }
+        docker {
+            image 'gcc'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
-        stage('Test'){
-            steps{
-                sh 'echo "Testing..."'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'g++ -o myapp myapp.cpp'
             }
         }
     }
