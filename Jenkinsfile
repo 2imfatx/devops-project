@@ -9,6 +9,7 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'echo "Building..."'
+                sh 'g++'
             }
         }
         stage('Test'){
